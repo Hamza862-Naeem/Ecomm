@@ -4,6 +4,7 @@ import 'package:ecomm/screens/auth%20ui/user%20panel/main%20screen.dart';
 import 'package:ecomm/utils/app-constants.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 
 import 'firebase_options.dart';
@@ -27,6 +28,7 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
 
       home:SignInScreen(),
+      builder: EasyLoading.init(),
     );
   }
 }
