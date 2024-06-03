@@ -9,6 +9,7 @@ import 'package:get/get.dart';
 
 import 'firebase_options.dart';
 import 'screens/auth ui/splash_screen.dart';
+import 'screens/auth ui/welcome_screen.dart';
 
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
@@ -27,7 +28,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
 
-      home:SignInScreen(),
+      home:WelcomeScreen(),
       builder: EasyLoading.init(),
     );
   }
