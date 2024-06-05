@@ -13,6 +13,7 @@ class UserModel{
   final bool isAdmin;
   final bool isActive;
   final dynamic createdOn;
+  final String city;
 
   UserModel({
     required this.uId,
@@ -27,6 +28,7 @@ class UserModel{
     required this.isAdmin,
     required this.isActive,
     required this.createdOn,
+    required this.city,
 });
 
   Map<String, dynamic>toMap(){
@@ -43,6 +45,7 @@ class UserModel{
       'isAdmin': isAdmin,
       'isActive': isActive,
       'createdOn': createdOn,
+      'city'     : city,
     };
   }
   factory UserModel.fromMap(Map<String, dynamic>json){
@@ -59,6 +62,7 @@ class UserModel{
       isAdmin: json['isAdmin'],
       isActive: json['isActive'],
       createdOn: json['createdOn'],
+      city: json['city'],
 
     );
   }

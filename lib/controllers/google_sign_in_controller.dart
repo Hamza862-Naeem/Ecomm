@@ -45,9 +45,12 @@ class GoogleSignInController extends GetxController{
               street: '',
               isAdmin: false,
               isActive: true,
-              createdOn: DateTime.now()
+              createdOn: DateTime.now(),
+              city: '',
           );
-          FirebaseFirestore.instance.collection('users').doc(user.uid).set(userModel.toMap());
+         await FirebaseFirestore.instance.collection('users')
+             .doc(user.uid)
+             .set(userModel.toMap());
           EasyLoading.dismiss();
           Get.offAll(()=> MainScreen());
         }

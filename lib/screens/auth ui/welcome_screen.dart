@@ -1,5 +1,6 @@
 
 import 'package:ecomm/controllers/google_sign_in_controller.dart';
+import 'package:ecomm/screens/auth%20ui/sign_in_screen.dart';
 import 'package:ecomm/utils/app-constants.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -91,7 +92,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                       ),
         
                       onPressed: () {
-        
+                     Get.to(()=> SignInScreen());
                       },
                       label: Text('Sign in with Email',
                         style: TextStyle(
