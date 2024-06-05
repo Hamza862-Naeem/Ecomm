@@ -23,8 +23,11 @@ class MainScreen extends StatelessWidget {
         actions: [
           GestureDetector(
             onTap: () async{
+              GoogleSignIn googleSignIn = GoogleSignIn();
+              FirebaseAuth _auth= FirebaseAuth.instance;
+               await _auth.signOut();
               await FirebaseAuth.instance.signOut();
-              await GoogleSignIn().signOut();
+
             // GoogleSignIn googleSignIn = GoogleSignIn();
              // await googleSignIn.signIn();
               Get.offAll(()=> WelcomeScreen());
