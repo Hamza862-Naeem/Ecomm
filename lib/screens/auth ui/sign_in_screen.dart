@@ -171,11 +171,16 @@ class _SignInScreenState extends State<SignInScreen> {
                       Get.to(()=> ForgetPasswordScreen());
                     },
                     child: Container(
-                      child: Text(
-                        'Forgot Password?',
-                        style: TextStyle(
-                          color: AppConstant.appSecondaryColor,
-                          fontWeight: FontWeight.bold,
+                      child: GestureDetector(
+                        onTap: (){
+                          Get.to(()=> ForgetPasswordScreen());
+                        },
+                        child: Text(
+                          'Forgot Password?',
+                          style: TextStyle(
+                            color: AppConstant.appSecondaryColor,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                       ),
                     ),

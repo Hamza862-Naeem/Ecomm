@@ -1,6 +1,6 @@
 
-
 import 'package:ecomm/controllers/sign_in_controller.dart';
+import 'package:ecomm/screens/auth%20ui/forget_password_screen.dart';
 import 'package:ecomm/screens/auth%20ui/user%20panel/main%20screen.dart';
 import 'package:ecomm/utils/app-constants.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -21,7 +21,7 @@ class ForgetPasswordScreen extends StatefulWidget {
 }
 
 class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
-  final ForgotPasswordController forgotPasswordController = Get.put(ForgotPasswordController());
+  final ForgetPasswordController forgetPasswordController = Get.put(ForgetPasswordController());
   TextEditingController userEmail = TextEditingController();
 
 
@@ -33,7 +33,7 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
             appBar: AppBar(
               centerTitle: true,
               backgroundColor: AppConstant.appSecondaryColor,
-              title: Text('Sign In',style: TextStyle(color: AppConstant.appTextColor),),
+              title: Text('Forget Password',style: TextStyle(color: AppConstant.appTextColor),),
             ),
             body: Container(
               child: Column(
@@ -70,14 +70,7 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                         ),
                       )),
                   SizedBox(height: Get.height/55,),
-                  Container(
-                      margin: EdgeInsets.symmetric(horizontal: 5),
-                      width: Get.width,
 
-                      child: Padding(
-                          padding: const EdgeInsets.all(10.0),
-
-                      )),
                   SizedBox(
                     height: Get.height/30,
                   ),
@@ -92,45 +85,31 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                       child: TextButton(
 
                         onPressed: () async{
+                          User? user = FirebaseAuth.instance.currentUser;
                           String email = userEmail.text.trim();
-                          String password = userPassword.text.trim();
-
-                          if (email.isEmpty  || password.isEmpty){
+                          if (user == null) {
+                            Get.snackbar('Error', 'You need to be logged in to change your password',
+                                snackPosition: SnackPosition.BOTTOM,
+                                backgroundColor: AppConstant.appSecondaryColor,
+                                colorText: AppConstant.appTextColor);
+                          }
+                          if (email.isEmpty  ){
                             Get.snackbar('error', 'Please enter all details',
                                 snackPosition: SnackPosition.BOTTOM,
                                 backgroundColor: AppConstant.appSecondaryColor,
                                 colorText: AppConstant.appTextColor);
-                          }else{
-                            UserCredential? userCredential=
-                            await signInController.signInMethod(email, password);
-                            if(userCredential != null ){
-                              if(userCredential.user!.emailVerified){
-                                Get.snackbar('Success',
-                                    'Login Successfully!',
-                                    snackPosition: SnackPosition.BOTTOM,
-                                    backgroundColor: AppConstant.appSecondaryColor,
-                                    colorText: AppConstant.appTextColor);
-                                Get.offAll(()=> MainScreen());
-                              }else{
-                                Get.snackbar('Error',
-                                    'Please verify your email , before login',
-                                    snackPosition: SnackPosition.BOTTOM,
-                                    backgroundColor: AppConstant.appSecondaryColor,
-                                    colorText: AppConstant.appTextColor);
-                              }
-                            }
-                            else{
-                              Get.snackbar('error', 'please try again',
-                                  snackPosition: SnackPosition.BOTTOM,
-                                  backgroundColor: AppConstant.appSecondaryColor,
-                                  colorText: AppConstant.appTextColor);
-                            }
-
+                          }
+                          else {
+                            String email= userEmail.text.trim();
+                            forgetPasswordController.ForgetPasswordMethod(email);
                           }
 
                         },
 
-                        child:Text('SIGN IN',
+
+
+
+                        child:Text('Forget Password',
                           style: TextStyle(
                             color: AppConstant.appTextColor,
                             fontSize: 18,
@@ -145,26 +124,13 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                   SizedBox(
                     height: Get.height/20,
                   ),
-
-
+                  GestureDetector(
+                    onTap:(){
+                      Get.to(()=> ForgetPasswordScreen());
+                    },
+                    child: Container(),
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text("Don't have an account? ",
-                        style: TextStyle(color: AppConstant.appSecondaryColor),
-                      ),
 
-                      GestureDetector(
-                        onTap: () => Get.offAll(()=> SignUpScreen()),
-                        child: Text('Sign Up',
-                          style: TextStyle(
-                              color: AppConstant.appSecondaryColor,
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold),
-                        ),
-                      )
-                    ],)
 
                 ],
               ),
