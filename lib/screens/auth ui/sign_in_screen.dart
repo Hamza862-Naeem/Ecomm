@@ -35,175 +35,177 @@ class _SignInScreenState extends State<SignInScreen> {
              backgroundColor: AppConstant.appSecondaryColor,
              title: Text('Sign In',style: TextStyle(color: AppConstant.appTextColor),),
            ),
-            body: Container(
-              child: Column(
-                children: [
-
-                  Container(
-                    color: AppConstant.appSecondaryColor,
-                    child: Column(
-                    children:[
-                      isKeyboardVisible?  SizedBox.shrink():
-                      Lottie.asset('assets/images/cart.json')
-                    ]
+            body: SingleChildScrollView(
+              child: Container(
+                child: Column(
+                  children: [
+              
+                    Container(
+                      color: AppConstant.appSecondaryColor,
+                      child: Column(
+                      children:[
+                        isKeyboardVisible?  SizedBox.shrink():
+                        Lottie.asset('assets/images/cart.json')
+                      ]
+                      ),
                     ),
-                  ),
-                  SizedBox(height: Get.height/55,),
-                  Container(
-                      margin: EdgeInsets.symmetric(horizontal: 5),
-                      width: Get.width,
-
-                      child: Padding(
-                        padding: const EdgeInsets.all(10.0),
-                        child: TextFormField(
-                          controller: userEmail,
-                          cursorColor: AppConstant.appSecondaryColor,
-                          keyboardType: TextInputType.emailAddress,
-                          decoration: InputDecoration(
-                            hintText: 'Email',
-                            prefixIcon: Icon(Icons.email),
-                            contentPadding: EdgeInsets.only(top: 2.0, left: 8.0),
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10.0),
-                            )
-                          ),
-                        ),
-                      )),
-                  SizedBox(height: Get.height/55,),
-                  Container(
-                      margin: EdgeInsets.symmetric(horizontal: 5),
-                      width: Get.width,
-
-                      child: Padding(
-                        padding: const EdgeInsets.all(10.0),
-                        child: Obx(() => TextFormField(
-                          controller: userPassword,
-                          obscureText: signInController.isPasswordVisible.value,
-                          cursorColor: AppConstant.appSecondaryColor,
-                          keyboardType: TextInputType.emailAddress,
-                          decoration: InputDecoration(
-                              hintText: 'Password',
-                              prefixIcon: Icon(Icons.password),
-                              suffixIcon: GestureDetector(
-                                onTap: (){
-                                  signInController.isPasswordVisible.toggle();
-                                },
-                                child:signInController.isPasswordVisible.value?
-                                Icon(Icons.visibility_off) :
-                                Icon(Icons.visibility),
-                              ),
+                    SizedBox(height: Get.height/55,),
+                    Container(
+                        margin: EdgeInsets.symmetric(horizontal: 5),
+                        width: Get.width,
+              
+                        child: Padding(
+                          padding: const EdgeInsets.all(10.0),
+                          child: TextFormField(
+                            controller: userEmail,
+                            cursorColor: AppConstant.appSecondaryColor,
+                            keyboardType: TextInputType.emailAddress,
+                            decoration: InputDecoration(
+                              hintText: 'Email',
+                              prefixIcon: Icon(Icons.email),
                               contentPadding: EdgeInsets.only(top: 2.0, left: 8.0),
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(10.0),
                               )
+                            ),
                           ),
-                        ),)
-                      )),
-                  SizedBox(
-                    height: Get.height/30,
-                  ),
-                  Material(
-                    child:Container(
-                      height: Get.height/18,
-                      width: Get.width/2,
-                      decoration: BoxDecoration(
-                        color: AppConstant.appSecondaryColor,
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                      child: TextButton(
-
-                        onPressed: () async{
-                         String email = userEmail.text.trim();
-                         String password = userPassword.text.trim();
-                         
-                         if (email.isEmpty  || password.isEmpty){
-                           Get.snackbar('error', 'Please enter all details',
-                           snackPosition: SnackPosition.BOTTOM,
-                           backgroundColor: AppConstant.appSecondaryColor,
-                           colorText: AppConstant.appTextColor);
-                         }else{
-                           UserCredential? userCredential=
-                               await signInController.signInMethod(email, password);
-                         if(userCredential != null ){
-                           if(userCredential.user!.emailVerified){
-                            Get.snackbar('Success',
-                                'Login Successfully!',
-                                snackPosition: SnackPosition.BOTTOM,
-                                backgroundColor: AppConstant.appSecondaryColor,
-                                colorText: AppConstant.appTextColor);
-                            Get.offAll(()=> MainScreen());
+                        )),
+                    SizedBox(height: Get.height/55,),
+                    Container(
+                        margin: EdgeInsets.symmetric(horizontal: 5),
+                        width: Get.width,
+              
+                        child: Padding(
+                          padding: const EdgeInsets.all(10.0),
+                          child: Obx(() => TextFormField(
+                            controller: userPassword,
+                            obscureText: signInController.isPasswordVisible.value,
+                            cursorColor: AppConstant.appSecondaryColor,
+                            keyboardType: TextInputType.emailAddress,
+                            decoration: InputDecoration(
+                                hintText: 'Password',
+                                prefixIcon: Icon(Icons.password),
+                                suffixIcon: GestureDetector(
+                                  onTap: (){
+                                    signInController.isPasswordVisible.toggle();
+                                  },
+                                  child:signInController.isPasswordVisible.value?
+                                  Icon(Icons.visibility_off) :
+                                  Icon(Icons.visibility),
+                                ),
+                                contentPadding: EdgeInsets.only(top: 2.0, left: 8.0),
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(10.0),
+                                )
+                            ),
+                          ),)
+                        )),
+                    SizedBox(
+                      height: Get.height/30,
+                    ),
+                    Material(
+                      child:Container(
+                        height: Get.height/18,
+                        width: Get.width/2,
+                        decoration: BoxDecoration(
+                          color: AppConstant.appSecondaryColor,
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                        child: TextButton(
+              
+                          onPressed: () async{
+                           String email = userEmail.text.trim();
+                           String password = userPassword.text.trim();
+                           
+                           if (email.isEmpty  || password.isEmpty){
+                             Get.snackbar('error', 'Please enter all details',
+                             snackPosition: SnackPosition.BOTTOM,
+                             backgroundColor: AppConstant.appSecondaryColor,
+                             colorText: AppConstant.appTextColor);
                            }else{
-                             Get.snackbar('Error',
-                                 'Please verify your email , before login',
+                             UserCredential? userCredential=
+                                 await signInController.signInMethod(email, password);
+                           if(userCredential != null ){
+                             if(userCredential.user!.emailVerified){
+                              Get.snackbar('Success',
+                                  'Login Successfully!',
+                                  snackPosition: SnackPosition.BOTTOM,
+                                  backgroundColor: AppConstant.appSecondaryColor,
+                                  colorText: AppConstant.appTextColor);
+                              Get.offAll(()=> MainScreen());
+                             }else{
+                               Get.snackbar('Error',
+                                   'Please verify your email , before login',
+                                   snackPosition: SnackPosition.BOTTOM,
+                                   backgroundColor: AppConstant.appSecondaryColor,
+                                   colorText: AppConstant.appTextColor);
+                             }
+                           }
+                           else{
+                             Get.snackbar('error', 'please try again',
                                  snackPosition: SnackPosition.BOTTOM,
                                  backgroundColor: AppConstant.appSecondaryColor,
                                  colorText: AppConstant.appTextColor);
                            }
-                         }
-                         else{
-                           Get.snackbar('error', 'please try again',
-                               snackPosition: SnackPosition.BOTTOM,
-                               backgroundColor: AppConstant.appSecondaryColor,
-                               colorText: AppConstant.appTextColor);
-                         }
-
-                         }
-
-                        },
-
-                        child:Text('SIGN IN',
-                          style: TextStyle(
-                            color: AppConstant.appTextColor,
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
-                          ),),
-
-
+              
+                           }
+              
+                          },
+              
+                          child:Text('SIGN IN',
+                            style: TextStyle(
+                              color: AppConstant.appTextColor,
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                            ),),
+              
+              
+                        ),
                       ),
+              
                     ),
-
-                  ),
-                  SizedBox(
-                    height: Get.height/20,
-                  ),
-                  GestureDetector(
-                    onTap:(){
-                      Get.to(()=> ForgetPasswordScreen());
-                    },
-                    child: Container(
-                      child: GestureDetector(
-                        onTap: (){
-                          Get.to(()=> ForgetPasswordScreen());
-                        },
-                        child: Text(
-                          'Forgot Password?',
-                          style: TextStyle(
-                            color: AppConstant.appSecondaryColor,
-                            fontWeight: FontWeight.bold,
+                    SizedBox(
+                      height: Get.height/20,
+                    ),
+                    GestureDetector(
+                      onTap:(){
+                        Get.to(()=> ForgetPasswordScreen());
+                      },
+                      child: Container(
+                        child: GestureDetector(
+                          onTap: (){
+                            Get.to(()=> ForgetPasswordScreen());
+                          },
+                          child: Text(
+                            'Forgot Password?',
+                            style: TextStyle(
+                              color: AppConstant.appSecondaryColor,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
                         ),
                       ),
                     ),
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                    Text("Don't have an account? ",
-                    style: TextStyle(color: AppConstant.appSecondaryColor),
-                    ),
-
-                      GestureDetector(
-                        onTap: () => Get.offAll(()=> SignUpScreen()),
-                        child: Text('Sign Up',
-                          style: TextStyle(
-                              color: AppConstant.appSecondaryColor,
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold),
-                        ),
-                      )
-                  ],)
-
-                ],
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                      Text("Don't have an account? ",
+                      style: TextStyle(color: AppConstant.appSecondaryColor),
+                      ),
+              
+                        GestureDetector(
+                          onTap: () => Get.offAll(()=> SignUpScreen()),
+                          child: Text('Sign Up',
+                            style: TextStyle(
+                                color: AppConstant.appSecondaryColor,
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold),
+                          ),
+                        )
+                    ],)
+              
+                  ],
+                ),
               ),
             ),
           );
