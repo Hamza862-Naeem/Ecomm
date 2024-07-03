@@ -1,5 +1,7 @@
 
+import 'package:ecomm/controllers/get-user-data-controller.dart';
 import 'package:ecomm/controllers/sign_in_controller.dart';
+import 'package:ecomm/screens/admin%20panel/admin%20main%20screen.dart';
 import 'package:ecomm/screens/auth%20ui/forget_password_screen.dart';
 import 'package:ecomm/screens/auth%20ui/user%20panel/main%20screen.dart';
 import 'package:ecomm/utils/app-constants.dart';
@@ -22,6 +24,8 @@ class SignInScreen extends StatefulWidget {
 
 class _SignInScreenState extends State<SignInScreen> {
   final SignInController signInController = Get.put(SignInController());
+  final GetUserDataController getUserDataController =
+  Get.put(GetUserDataController());
   TextEditingController userEmail = TextEditingController();
   TextEditingController userPassword =TextEditingController();
 
@@ -125,14 +129,33 @@ class _SignInScreenState extends State<SignInScreen> {
                            }else{
                              UserCredential? userCredential=
                                  await signInController.signInMethod(email, password);
+
+                             var  userData = await getUserDataController.getUserData(userCredential!.user!.uid);
+
                            if(userCredential != null ){
                              if(userCredential.user!.emailVerified){
-                              Get.snackbar('Success',
-                                  'Login Successfully!',
-                                  snackPosition: SnackPosition.BOTTOM,
-                                  backgroundColor: AppConstant.appSecondaryColor,
-                                  colorText: AppConstant.appTextColor);
-                              Get.offAll(()=> MainScreen());
+
+                               if(userData[0]['isAdmin'] == true){
+                                 Get.offAll(()=> AdminMainScreen());
+                           Get.snackbar(
+                          ' Successfully! Admin Login',
+                          'Login Succesfully',
+                      snackPosition: SnackPosition.BOTTOM,
+                        backgroundColor: AppConstant.appSecondaryColor,
+                           colorText: AppConstant.appTextColor);
+
+
+                               }else {
+                                Get.offAll(() => MainScreen());
+                                Get.snackbar(
+                                    ' Successfully! User Login',
+                                    'Login Succesfully',
+                                    snackPosition: SnackPosition.BOTTOM,
+                                    backgroundColor: AppConstant.appSecondaryColor,
+                                    colorText: AppConstant.appTextColor);
+
+                               }
+
                              }else{
                                Get.snackbar('Error',
                                    'Please verify your email , before login',

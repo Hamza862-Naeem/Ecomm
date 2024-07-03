@@ -47,7 +47,7 @@ class SignUpController extends GetxController{
         isAdmin: false,
         isActive: true,
         createdOn: DateTime.now(),
-      city: 'userCity',
+        city: userCity,
     );
     //add data into database
           _firestore.collection('users')
