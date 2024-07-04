@@ -1,7 +1,9 @@
 
 import 'package:ecomm/screens/auth%20ui/welcome_screen.dart';
 import 'package:ecomm/utils/app-constants.dart';
+import 'package:ecomm/widgets/banner-widget.dart';
 import 'package:ecomm/widgets/custom-drawer.dart';
+import 'package:ecomm/widgets/heading-widget.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -27,6 +29,29 @@ class MainScreen extends StatelessWidget {
         centerTitle: true,
       ),
       drawer: DrawerWidget(),
+      body: SingleChildScrollView(
+        physics: BouncingScrollPhysics(),
+        child: Container(
+          child: Column(
+            children: [
+              SizedBox(height: Get.height/90.0,),
+              BannerWidget(),
+              HeadingWidget(
+                headingTitle: 'Categories',
+                headingSubTitle: 'According to your budget',
+                onTap: (){},
+                  buttonText: 'See More >',
+              ),
+              HeadingWidget(
+                headingTitle: 'Flash Sale',
+                headingSubTitle: 'According to your budget',
+                onTap: (){},
+                buttonText: 'See More >',
+              ),
+            ],
+          ),
+        ),
+      ),
     );
   }
 }

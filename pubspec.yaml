@@ -46,6 +46,8 @@ dependencies:
   flutter_easyloading: ^3.0.5
   firebase_cloud_messaging_flutter: ^1.0.6
   firebase_messaging: ^14.9.4
+  carousel_slider: ^4.2.1
+  cached_network_image: ^3.3.1
 
 dev_dependencies:
   flutter_test:
