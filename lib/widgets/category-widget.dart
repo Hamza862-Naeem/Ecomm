@@ -2,6 +2,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:ecomm/models/categories-models.dart';
+import 'package:ecomm/screens/auth%20ui/user%20panel/single-category-product-screen.dart';
 
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
@@ -22,7 +23,7 @@ class CategoryWidget extends StatelessWidget {
           }
           if (snapshot.connectionState == ConnectionState.waiting) {
             return Container(
-              height: Get.height / 5,
+              height: Get.height /5,
               child: Center(
                 child: CupertinoActivityIndicator(),
               ),
@@ -49,19 +50,22 @@ return Center(
                         updatedAt: snapshot.data!.docs[index]['updatedAt']);
                     return Row(
                       children: [
-                        Padding(padding: EdgeInsets.all(5.0),
-                        child: Container(
-                          child:FillImageCard(
-                            borderRadius: 20.0,
-                            width: Get.width/4.0,
-                            heightImage: Get.height/12,
-                            imageProvider: CachedNetworkImageProvider(categoriesModel.categoryImg),
+                        GestureDetector(
+                          onTap: ()=> Get.to(() => AllSingleCategoryProductsScreen(categoryId: categoriesModel.categoryId)),
+                          child: Padding(padding: EdgeInsets.all(5.0),
+                          child: Container(
+                            child:FillImageCard(
+                              borderRadius: 20.0,
+                              width: Get.width/4.0,
+                              heightImage: Get.height/12,
+                              imageProvider: CachedNetworkImageProvider(categoriesModel.categoryImg),
 
-                            title: Center(
-                                child: Text(categoriesModel.categoryName,style: TextStyle(fontSize: 12.0),)),
+                              title: Center(
+                                  child: Text(categoriesModel.categoryName,style: TextStyle(fontSize: 12.0),)),
 
-                          ),
-                        ),),
+                            ),
+                          ),),
+                        ),
 
                       ],
                     );
