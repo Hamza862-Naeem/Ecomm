@@ -2,6 +2,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:ecomm/models/product-model.dart';
+import 'package:ecomm/screens/auth%20ui/user%20panel/product-details-screen.dart';
 import 'package:ecomm/utils/app-constants.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -86,22 +87,25 @@ class _AllSingleCategoryProductsScreenState extends State<AllSingleCategoryProdu
                         updatedAt: snapshot.data!.docs[index]['updatedAt']);*/
                     return Row(
                       children: [
-                        Padding(
-                          padding: EdgeInsets.all(8.0),
-                      child: Container(
-                            child:FillImageCard(
-                              borderRadius: 20.0,
-                              width: Get.width/ 2.3,
-                              heightImage: Get.height/ 10,
-                              imageProvider: CachedNetworkImageProvider
-                                (productModel.productImages[0],
-                    ),
-
-                              title: Center(
-                                  child: Text(productModel.productName,
-                                    overflow: TextOverflow.ellipsis,
-                                    style: TextStyle(fontSize: 12.0),)),
-
+                        GestureDetector(
+                          onTap: () => Get.to(()=> ProductDetailsScreen(productModel: productModel)),
+                          child: Padding(
+                            padding: EdgeInsets.all(8.0),
+                                                child: Container(
+                              child:FillImageCard(
+                                borderRadius: 20.0,
+                                width: Get.width/ 2.3,
+                                heightImage: Get.height/ 10,
+                                imageProvider: CachedNetworkImageProvider
+                                  (productModel.productImages[0],
+                                              ),
+                          
+                                title: Center(
+                                    child: Text(productModel.productName,
+                                      overflow: TextOverflow.ellipsis,
+                                      style: TextStyle(fontSize: 12.0),)),
+                          
+                              ),
                             ),
                           ),
                         )

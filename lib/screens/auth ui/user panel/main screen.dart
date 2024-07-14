@@ -3,6 +3,7 @@ import 'package:ecomm/screens/auth%20ui/user%20panel/all-categories-screen.dart'
 import 'package:ecomm/screens/auth%20ui/user%20panel/all-flash-sale-products.dart';
 import 'package:ecomm/screens/auth%20ui/welcome_screen.dart';
 import 'package:ecomm/utils/app-constants.dart';
+import 'package:ecomm/widgets/all-product-widget.dart';
 import 'package:ecomm/widgets/banner-widget.dart';
 import 'package:ecomm/widgets/category-widget.dart';
 import 'package:ecomm/widgets/custom-drawer.dart';
@@ -13,6 +14,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+
+import 'all-product-screen.dart';
 
 class MainScreen extends StatelessWidget {
   const MainScreen({super.key});
@@ -55,6 +58,13 @@ class MainScreen extends StatelessWidget {
                 buttonText: 'See More >',
               ),
               FlashSaleWidget(),
+              HeadingWidget(
+                headingTitle: 'All Products',
+                headingSubTitle: 'According to your budget',
+                onTap:() => Get.to(()=> AllProductScreen()),
+                buttonText: 'See More >',
+              ),
+              AllProductWidget(),
             ],
           ),
         ),
