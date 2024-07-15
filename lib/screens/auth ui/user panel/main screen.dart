@@ -1,6 +1,7 @@
 
 import 'package:ecomm/screens/auth%20ui/user%20panel/all-categories-screen.dart';
 import 'package:ecomm/screens/auth%20ui/user%20panel/all-flash-sale-products.dart';
+import 'package:ecomm/screens/auth%20ui/user%20panel/cart-screen.dart';
 import 'package:ecomm/screens/auth%20ui/welcome_screen.dart';
 import 'package:ecomm/utils/app-constants.dart';
 import 'package:ecomm/widgets/all-product-widget.dart';
@@ -34,6 +35,15 @@ class MainScreen extends StatelessWidget {
         style: TextStyle(color: AppConstant.appTextColor),),
         backgroundColor: AppConstant.appMainColor,
         centerTitle: true,
+        actions: [
+          GestureDetector(
+            onTap:() => Get.to (() => CartScreen()),
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Icon(Icons.shopping_cart),
+            ),
+          )
+        ],
       ),
       drawer: DrawerWidget(),
       body: SingleChildScrollView(
