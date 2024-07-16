@@ -10,6 +10,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import 'cart-screen.dart';
 
@@ -207,7 +208,9 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                                         ),
 
                                         onPressed: ()  {
-                                          //    Get.to(()=> SignInScreen());
+                                          sendMessageOnWhatsApp(
+                                            productModel: widget.productModel, 
+                                          );
 
 
                                         },
@@ -230,6 +233,23 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
       ),
     );
   }
+
+  static Future<void>sendMessageOnWhatsApp({
+    required ProductModel productModel,
+  })async {
+  final number = '03316431862';
+    final message = 'Hi Ecomm \n i want to know about this product \n ${productModel.productName} \n ${productModel.productId}';
+
+    final url = 'https://wa.me/$number?text=${Uri.encodeComponent(message)}';
+
+    if(await canLaunch(url)){
+      await launch(url);
+    }
+    else{
+      throw 'Could not Launch $url';
+    }
+  }
+
 
   Future<void> checkProductExistence({required String uId, int quantityIncrement =1,}) async {
     final DocumentReference documentReference = FirebaseFirestore.instance

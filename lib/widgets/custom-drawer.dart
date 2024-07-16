@@ -1,5 +1,6 @@
 
 
+import 'package:ecomm/screens/auth%20ui/user%20panel/all-orders-screen.dart';
 import 'package:ecomm/utils/app-constants.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
@@ -78,6 +79,10 @@ class _DrawerWidgetState extends State<DrawerWidget> {
                 title: Text('Orders' ,style: TextStyle(color: AppConstant.appTextColor)),
                 leading: Icon(Icons.shopping_bag ,color: AppConstant.appTextColor),
                 trailing: Icon(Icons.arrow_forward ,color: AppConstant.appTextColor),
+              onTap: (){
+                  Get.back();
+                  Get.to(()=> AllOrdersScreen());
+              },
               ),
             ),
             Padding(
