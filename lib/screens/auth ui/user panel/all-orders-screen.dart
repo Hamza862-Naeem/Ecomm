@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:ecomm/controllers/cart-price-controller.dart';
 import 'package:ecomm/models/cart-model.dart';
 import 'package:ecomm/models/order-model.dart';
+import 'package:ecomm/screens/auth%20ui/user%20panel/add-review-screen.dart';
 import 'package:ecomm/screens/auth%20ui/user%20panel/checkout-screen.dart';
 import 'package:ecomm/utils/app-constants.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -103,6 +104,13 @@ class _CartScreenState extends State<AllOrdersScreen> {
                             :Text('Delivered',style: TextStyle(color: Colors.red),)
                       ],
                     ),
+                    trailing:orderModel.status == true ?ElevatedButton(
+                      onPressed: ()=> Get.to(()=> AddReviewScreen(
+                        orderModel: orderModel
+                      )),
+                      child: Text('Review'),
+                    )
+                        :SizedBox.shrink()
                   ),
                 );
               },
